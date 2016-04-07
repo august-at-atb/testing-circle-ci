@@ -14,12 +14,6 @@ class JsonBuilder implements BuilderInterface
         $this->buildHelper = $buildHelper;
     }
 
-    public function create($orderId)
-    {
-        $shipmentData = $this->_build($orderId);
-        return $this->_formatJson($shipmentData);
-    }
-
     private function _build($orderId)
     {
         $order = $this->buildHelper->getOrder($orderId);
