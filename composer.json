@@ -22,7 +22,6 @@
         "aws/aws-sdk-php": "~3.0",
         "barryvdh/laravel-cors": "^0.8.0",
         "zircote/swagger-php": "*",
-        "atypicalbrandsllc/atb-custom-oms-message-bus": "0.0.*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
