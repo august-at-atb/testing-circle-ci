@@ -4,12 +4,6 @@
     "keywords": ["framework", "laravel", "lumen"],
     "license": "MIT",
     "type": "project",
-    "repositories": [
-        {
-            "url": "git@github.com:AtypicalBrandsLLC/atb-custom.oms.message.bus.git",
-            "type": "vcs"
-        }
-    ],
     "require": {
         "php": ">=5.5.9",
         "laravel/lumen-framework": "5.2.*",
