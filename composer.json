@@ -21,7 +21,7 @@
         "beberlei/DoctrineExtensions" : "^1.0",
         "aws/aws-sdk-php": "~3.0",
         "barryvdh/laravel-cors": "^0.8.0",
-        "zircote/swagger-php": "*",
+        "zircote/swagger-php": "*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
