@@ -1,12 +1,5 @@
 <?php
 
-/**
- * @category Atypicalbrands
- * Written by: vyatsyuk@atypicalbrands.com
- * Date: 04.02.16
- *
- */
-
 namespace App\Contracts;
 
 use Doctrine\ORM\EntityNotFoundException;

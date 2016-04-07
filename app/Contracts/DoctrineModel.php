@@ -1,13 +1,7 @@
 <?php
 
-/**
- * @category Atypicalbrands
- * Written by: vyatsyuk@atypicalbrands.com
- * Date: 18.01.16
- *
- */
-
 namespace App\Contracts;
+
 
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\PersistentCollection;
@@ -35,6 +29,7 @@ abstract class DoctrineModel implements Jsonable, JsonSerializable, Arrayable {
 
     public function __construct(EntityManagerInterface $em){
         $this->_em = $em;
+        $this->_init();
     }
 
 
@@ -135,6 +130,8 @@ abstract class DoctrineModel implements Jsonable, JsonSerializable, Arrayable {
         $propsHiddenByDefault = ['hidden', '_em'];
         return array_merge($this->hidden, $propsHiddenByDefault);
     }
+
+    abstract protected function _init();
 
     /**
      * @return \Doctrine\Common\Persistence\ObjectRepository

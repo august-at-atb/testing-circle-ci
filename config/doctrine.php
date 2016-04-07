@@ -29,8 +29,7 @@ return [
                 'App'
             ],
             'paths'      => [
-                base_path('app'),
-                base_path('vendor/atypicalbrandsllc/atb-custom-oms-message-bus/src/Log')
+                base_path('app')
             ],
             'repository' => Doctrine\ORM\EntityRepository::class,
             'proxies'    => [
@@ -94,8 +93,8 @@ return [
         //LaravelDoctrine\ORM\Extensions\TablePrefix\TablePrefixExtension::class,
         LaravelDoctrine\Extensions\Timestamps\TimestampableExtension::class,
         //LaravelDoctrine\Extensions\SoftDeletes\SoftDeleteableExtension::class,
-        LaravelDoctrine\Extensions\Sluggable\SluggableExtension::class,
-        LaravelDoctrine\Extensions\Sortable\SortableExtension::class,
+        //LaravelDoctrine\Extensions\Sluggable\SluggableExtension::class,
+        //LaravelDoctrine\Extensions\Sortable\SortableExtension::class,
         //LaravelDoctrine\Extensions\SoftDeletes\SoftDeleteableExtension::class,
         //LaravelDoctrine\Extensions\Sluggable\SluggableExtension::class,
         //LaravelDoctrine\Extensions\Tree\TreeExtension::class,

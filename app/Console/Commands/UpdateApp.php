@@ -3,7 +3,6 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use Collective\Remote\RemoteFacade as SSH;
 
 class UpdateApp extends Command
 {

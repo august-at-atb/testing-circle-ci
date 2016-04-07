@@ -12,10 +12,15 @@ return [
     |
     */
 
-    'spreedly' => [
-       'api_url' => env('SPREEDLY_API_URL'),
-       'environment_key' => env('SPREEDLY_ENVIRONMENT_KEY'),
-       'access_secret' => env('SPREEDLY_ACCESS_SECRET'),
+    'shipstation' => [
+       'store' => env('SHIPSTATION_STORE'),
+       'api_key' => env('SHIPSTATION_API_KEY'),
+       'api_secret' => env('SHIPSTATION_API_SECRET'),
+       'webhook_target_url' => env('SHIPSTATION_WEBHOOK_TARGET_URL'),
+    ],
+
+    'amazon' => [
+       'api_gateway_order_update_url' => env('AWS_API_GATEWAY_ORDER_UPDATE_URL'),
     ],
 
 ];

@@ -1,5 +1,4 @@
-
-## Atypical Brands Payment Microservice
+[![Circle CI](https://circleci.com/gh/AtypicalBrandsLLC/atb-custom.ecommerce.shipstation.svg?style=svg&circle-token=a1e75e20667514c813ae4b41b1fbf23b3d4b942c)](https://circleci.com/gh/AtypicalBrandsLLC/atb-custom.ecommerce.shipstation)
 
 ### Requirements:
 
@@ -11,23 +10,24 @@
 
 1. Run "composer install" in the root directory
 2. Copy .env.example as .env
-3. Add appropriate values for Spreedly Service
-ex. SPREEDLY_API_URL=ABC123
-4. Generate doctrine proxies "php artisan doctrine:generate:proxies"
-5. Run migrations if needed: "php artisan doctrine:migrations:migrate"
+3. Add appropriate values for ShipStation Service and AWS SQS Queue
+ex. SHIPSTATION_API_KEY=ABC123
+4. Add laravel scheduler to cron https://laravel.com/docs/master/scheduling
+ShipStation service currently connects to its own database, gets 30 shipments by default every minute and sends to ShipStation API. For failed sync, it will get 10 by default for every 5 minutes. Current max retry is 5.
+5. Generate doctrine proxies "php artisan doctrine:generate:proxies"
 
-### API
+Note: you can run php artisan command to sync 30 orders by default manually
+php artisan shipstation:send / resend for failed sync
 
-void - expects JSON data with transaction_token then calls Spreedly API to void transaction
+Note: to run the queue, you'll need to run a queue listener command ```php artisan queue:listen aws_sqs_shipment``` ```php artisan queue:listen aws_sqs_shipped_url```  and daemonize it with [Forever](https://www.exratione.com/2013/02/nodejs-and-forever-as-a-service-simple-upstart-and-init-scripts-for-ubuntu/) or [Supervisord](http://supervisord.org/installing.html). Please refer to laravel [manual](https://laravel.com/docs/5.2/queues#running-the-queue-listener)
 
-refund/full - expects JSON data with transaction_token then calls Spreedly API to refund transaction
+aws_sqs_shipment listener listens to a queue with order data and store to the database
+aws_sqs_shipped_url listener listens to a queue with shipment URL from ShipStation
 
-refund/partial - expects JSON data with transaction_token and amount then calls Spreedly API to partial refund transaction
+### Process
 
-Notes:
-API has swagger doc annotation for possibility of generating swagger doc json file
-
-Service expects API Gateway as a proxy to endpoint
-
-### Events
-App\Events\ApiRequestSucceededEvent broadcast to SNS with JSON value
+1. Shipping service aws_sqs_shipment listens to SQS then store order data to database
+2. Shipping service scheduler sends data to ShipStation API
+3. When we print label in ShipStation, ShipStation sends the shipment URL to SHIPSTATION_WEBHOOK_TARGET_URL
+4. Shipping service aws_sqs_shipments listens to SQS then call the shipment URL to get shipment data
+5. Shipping service updates its own database and sends the shipment data to AWS_API_GATEWAY_ORDER_UPDATE_URL

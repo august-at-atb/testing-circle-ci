@@ -16,12 +16,6 @@ class CurlService
         return $this;
     }
 
-    public function setUserPassword($username, $password)
-    {
-        curl_setopt($this->ch, CURLOPT_USERPWD, $username.":".$password);
-        return $this;
-    }
-
     public function setPost()
     {
         curl_setopt($this->ch, CURLOPT_POST, true);

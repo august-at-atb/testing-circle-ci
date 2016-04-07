@@ -1,17 +1,11 @@
 <?php
-/*
-error_reporting(E_ALL);
-ini_set('display_errors', true);
-*/
-
-date_default_timezone_set('America/Los_Angeles');
 
 require_once __DIR__.'/../vendor/autoload.php';
 
 try {
-   (new Dotenv\Dotenv(__DIR__.'/../'))->load();
+    (new Dotenv\Dotenv(__DIR__.'/../'))->load();
 } catch (Dotenv\Exception\InvalidPathException $e) {
-    var_dump($e);
+    //
 }
 
 /*
@@ -25,25 +19,19 @@ try {
 |
 */
 
-/*$app = new Laravel\Lumen\Application(
-    realpath(__DIR__.'/../')
-);*/
-
-$app = new Atypicalbrands\MessageBus\LumenApplication(
+$app = new Laravel\Lumen\Application(
     realpath(__DIR__.'/../')
 );
 
 $app->withFacades();
-// $app->withEloquent();
 
+// $app->withEloquent();
 
 $app->configure('app');
 $app->configure('queue');
-$app->configure('doctrine');
 $app->configure('migrations');
-$app->configure('cors');
-$app->configure('broadcasting');
 $app->configure('services');
+
 
 /*
 |--------------------------------------------------------------------------
@@ -81,9 +69,9 @@ $app->singleton(
 //    App\Http\Middleware\ExampleMiddleware::class
 // ]);
 
- $app->routeMiddleware([
-     'auth' => App\Http\Middleware\Authenticate::class,
- ]);
+// $app->routeMiddleware([
+//     'auth' => App\Http\Middleware\Authenticate::class,
+// ]);
 
 /*
 |--------------------------------------------------------------------------
@@ -96,41 +84,13 @@ $app->singleton(
 |
 */
 
-
 $app->register(App\Providers\AppServiceProvider::class);
-$app->register(App\Providers\AuthServiceProvider::class);
-$app->register(App\Providers\EventServiceProvider::class);
+// $app->register(App\Providers\AuthServiceProvider::class);
+// $app->register(App\Providers\EventServiceProvider::class);
 
 $app->register(LaravelDoctrine\ORM\DoctrineServiceProvider::class);
 $app->register(LaravelDoctrine\Migrations\MigrationsServiceProvider::class);
-
 $app->register(LaravelDoctrine\Extensions\GedmoExtensionsServiceProvider::class);
-$app->register(Illuminate\Pagination\PaginationServiceProvider::class);
-$app->register(Barryvdh\Cors\LumenServiceProvider::class);
-
-$app->register(Illuminate\Broadcasting\BroadcastServiceProvider::class);
-$app->register(Atypicalbrands\MessageBus\MessageBusServiceProvider::class);
-
-/*
- *
- * Register Doctrine Facades
- *
-*/
-
-if (!class_exists('EntityManager')) {
-    class_alias('LaravelDoctrine\ORM\Facades\EntityManager', 'EntityManager');
-}
-
-if (!class_exists('Registry')) {
-    class_alias('LaravelDoctrine\ORM\Facades\Registry', 'Registry');
-
-}
-if (!class_exists('Doctrine')) {
-    class_alias('LaravelDoctrine\ORM\Facades\Doctrine', 'Doctrine');
-}
-
-// Doctrine conflicts with Swagger annotation so ignore
-Doctrine\Common\Annotations\AnnotationReader::addGlobalIgnoredName('Swagger\Annotations\Info');
 
 /*
 |--------------------------------------------------------------------------

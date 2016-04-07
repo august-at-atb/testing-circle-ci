@@ -39,10 +39,9 @@ return [
     | will not be safe. Please do this before deploying an application!
     |
     */
-    'url' => 'http://localhost',
-    'key' => 'I2PdLTtsgfxbcfmawDvohN6UiYV0aZg7',
+
+    'key' => env('APP_KEY'),
 
     'cipher' => 'AES-256-CBC',
-
 
 ];

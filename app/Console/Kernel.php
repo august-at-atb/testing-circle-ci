@@ -13,8 +13,10 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
-            Commands\UpdateApp::class
+        Commands\ShipStationSend::class,
+        Commands\ShipStationResend::class,
+        Commands\ShipStationWebHook::class,
+        Commands\UpdateApp::class,
     ];
 
     /**
@@ -25,6 +27,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        //
+        $schedule->command('shipstation:send')->everyMinute();
+        $schedule->command('shipstation:resend')->everyFiveMinutes();
     }
 }

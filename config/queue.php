@@ -35,14 +35,24 @@ return [
             'driver' => 'sync',
         ],
 
-        'sqs' => [
+        'aws_sqs_shipment' => [
             'driver' => 'sqs',
-            'key'    => '',
-            'secret' => '',
-            'prefix' => '',
-            'queue'  => '',
-            'region' => ''
+            'key'    => env('AWS_SQS_SHIPMENT_KEY'),
+            'secret' => env('AWS_SQS_SHIPMENT_SECRET'),
+            'prefix' => env('AWS_SQS_SHIPMENT_PREFIX'),
+            'queue'  => env('AWS_SQS_SHIPMENT_NAME'),
+            'region' => env('AWS_SQS_SHIPMENT_REGION'),
         ],
+
+        'aws_sqs_shipped_url' => [
+            'driver' => 'sqs',
+            'key'    => env('AWS_SQS_SHIPPED_URL_KEY'),
+            'secret' => env('AWS_SQS_SHIPPED_URL_SECRET'),
+            'prefix' => env('AWS_SQS_SHIPPED_URL_PREFIX'),
+            'queue'  => env('AWS_SQS_SHIPPED_URL_NAME'),
+            'region' => env('AWS_SQS_SHIPPED_URL_REGION'),
+        ],
+
     ],
 
 ];
